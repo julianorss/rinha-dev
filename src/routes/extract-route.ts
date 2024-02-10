@@ -12,18 +12,39 @@ export async function extract(app: FastifyInstance) {
 
     const { id } = paramsSchema.parse(req.params)
 
-    const extrato = await prisma.clientes
+    const cliente = await prisma.clientes
       .findUniqueOrThrow({
         where: {
           id: id,
         },
       })
       .catch(() => {
-        return reply.status(404).send({ error: "cliente não existe." })
+        return reply.status(404).send({ error: "cliente non ecziste!" })
+      })
+
+    const ultimasTransacoes = await prisma.transacoes
+      .findMany({
+        where: {
+          clientes_id: id,
+        },
+        take: 10,
+        orderBy: {
+          realizada_em: "desc",
+        },
+      })
+      .catch(() => {
+        return reply.status(500).send({
+          error: "Não foi possível encontrar as transações do cliente.",
+        })
       })
 
     return reply.status(200).send({
-      extrato,
+      saldo: {
+        total: cliente.saldo,
+        data_extrato: new Date().toISOString(),
+        limite: cliente.limite,
+      },
+      ultimasTransacoes: ultimasTransacoes,
     })
   })
 }
