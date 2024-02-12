@@ -13,4 +13,4 @@ RUN pnpm run build
 EXPOSE 8080
 
 # CMD [ "pnpm", "run", "start" ]
-CMD ["pnpm", "run", "start:migrate:prod"]
+CMD ["pnpm", "run", "start:prod"]

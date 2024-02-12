@@ -9,7 +9,7 @@
     "build": "npx tsc",
     "db:build": "npx prisma migrate && npx prisma db seed",
     "start": "node ./build/src/server.js",
-    "start:migrate:prod": "npx prisma migrate deploy && npx prisma db seed && pnpm run start"
+    "start:prod": "npx prisma migrate deploy && npx prisma db seed && pnpm run start"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
