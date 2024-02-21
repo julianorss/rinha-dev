@@ -3,13 +3,16 @@ import { transactions } from "./routes/transactions-route"
 import { extract } from "./routes/extract-route"
 
 const app = fastify()
-const PORT = 8080
+
+const HOST = "0.0.0.0" // Para acessar a API fora do container
+const PORT = 3333
 
 app.register(transactions)
 app.register(extract)
 
 app
   .listen({
+    host: HOST,
     port: PORT,
   })
   .then(() => {

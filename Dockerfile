@@ -1,16 +1,19 @@
 FROM node:20-alpine
 
-WORKDIR /usr
+WORKDIR /app
 
 COPY pnpm-lock.yaml package.json ./
+
 COPY prisma ./prisma/
 
 RUN npm install -g pnpm
-RUN pnpm i
+
+RUN pnpm i --production
+
 COPY . .
+
 RUN pnpm run build
 
-EXPOSE 8080
+EXPOSE 3333
 
-# CMD [ "pnpm", "run", "start" ]
 CMD ["pnpm", "run", "start:prod"]

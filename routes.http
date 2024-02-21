@@ -1,14 +1,14 @@
 # @name transactions
-POST http://localhost:8080/clientes/2/transacoes
+POST http://localhost:3333/clientes/2/transacoes
 Content-Type: application/json
 
 {
-    "valor": 50000,
-    "tipo" : "d",
+    "valor": 10000,
+    "tipo" : "c",
     "descricao" : "Saque"
 }
 
 ###
 
 # @name extrato
-GET http://localhost:8080/clientes/2/extrato
+GET http://localhost:3333/clientes/2/extrato
